@@ -3,7 +3,7 @@
 
 ### Setup
 
-Install docker and buildx on standard Amazon Linux instance running on graviton:
+Install docker and buildx on standard Amazon Linux v2 host running on graviton instance:
 
 ```
 # Install git
@@ -54,16 +54,23 @@ cd $WORKSPACE/example
 Please Note: this issue appears to be intermittent, so please rerun (using `docker buildx prune` each time before running a new build).
 
 ```
-# Prune buidx cache
-[ec2-user@ip-172-31-30-195 example]$ docker buildx prune -f
+# Prune buildx cache
+[ec2-user@ip-172-31-30-195 ~]$ docker buildx prune -f
 ID                                    RECLAIMABLE    SIZE    LAST ACCESSED
 jm5vfzevn06iy9auwcnz6iq91*            true           0B
 dr2cxdl49h1un7omqacd3ycgd*            true           369.67kB
 25k0icaltuqfhtha0uyvqrkw6*            true           265B
 ...
+# Switch to project workspace
+[ec2-user@ip-172-31-30-195 ~]$ cd $WORKSPACE/example
+
+[ec2-user@ip-172-31-30-195 example]$ git status
+On branch dev-segfault-example-1
+Your branch is up to date with 'origin/dev-segfault-example-1'.
+
+nothing to commit, working tree clean
 
 # Run build script
-[ec2-user@ip-172-31-30-195 ~]$ cd $WORKSPACE/example
 [ec2-user@ip-172-31-30-195 example]$ ./cross-build.sh
 
  * Compiling amd64 image ...

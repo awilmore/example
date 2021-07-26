@@ -7,5 +7,6 @@ WORKDIR /src
 COPY . $BUILD_PATH
 
 # Compile source code
+# NOTE - using the same compile flags that we use for our projects
 RUN cd $BUILD_PATH/gotypes && \
     CGO_ENABLED=0 go build -ldflags="-w" -tags=timetzdata ./...
